@@ -10,7 +10,7 @@ SFML and CMake must be installed!
 
 Clone the repo:
 ```bash
-git clone URL my-project
+git clone https://github.com/ammar-ahmed22/cpp-sfml-template.git my-project
 ```
 
 Change directory:
