@@ -10,8 +10,8 @@ using sf::Vector2f;
 int main() {
 
   // Constants
-  const float    window_width  = 800.f;
-  const float    window_height = 600.f;
+  const float    window_width  = 1200.f;
+  const float    window_height = 800.f;
   const string   window_name   = "Test";
   const int      grid_spacing  = 40;
   const int      num_rows      = window_height / grid_spacing;
