@@ -6,7 +6,7 @@ A simple Makefile is created to run the CMake commands.
 Everything is MacOS specific, changes will need to be made for Windows.
 
 ## Compilation
-SFML and CMake must be installed!
+[SFML](https://www.sfml-dev.org/) and [CMake](https://cmake.org/) must be installed!
 
 Clone the repo:
 ```bash
