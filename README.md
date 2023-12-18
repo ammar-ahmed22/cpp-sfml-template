@@ -22,9 +22,10 @@ Compile the project:
 ```bash
 make
 ```
+> With CMake only: `mkdir -p build && cmake -S . -B ./build`
 
 Run the project:
 ```bash
 make run
 ```
-
+> or `./build/Project`
