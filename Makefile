@@ -14,5 +14,8 @@ pre_build:
 run:
 	@./${BUILD_DIR}/${PROJECT_NAME}
 
+watch:
+	@ls ./src/*.cpp ./include/**/*.hpp ./include/*.cpp | entr -sp 'echo Files changed, compiling... && make && make run'
+
 clean:
 	rm -rf ./${BUILD_DIR}

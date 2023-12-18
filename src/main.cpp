@@ -4,19 +4,16 @@
 #include "event.hpp"
 #include "renderer.hpp"
 
-using std::string;
-using sf::Vector2f;
-
 int main() {
 
   // Constants
   const float    window_width  = 1200.f;
   const float    window_height = 800.f;
-  const string   window_name   = "Test";
+  const std::string   window_name   = "Test";
   const int      grid_spacing  = 40;
   const int      num_rows      = window_height / grid_spacing;
   const int      num_cols      = window_width / grid_spacing;
-  const Vector2f center        = { window_width / 2, window_height / 2 };
+  const sf::Vector2f center        = { window_width / 2, window_height / 2 };
 
   // Creating window
   sf::ContextSettings settings;
@@ -31,24 +28,32 @@ int main() {
   // Renderer
   Renderer renderer(&window);
 
+  // View
+  sf::View view(center, sf::Vector2f(window_width, window_height));
+
   //Event handler
-  EventHandler event_handler(&window);
-  event_handler.add_event_listener(Close, handle_close);
-  event_handler.add_event_listener(MousePress, handle_mouse_press);
-  event_handler.add_event_listener(MouseRelease, handle_mouse_release);
+  EventHandler event_handler(&window, view);
+  event_handler.addEventListener(Close, handleClose);
+  event_handler.addEventListener(MousePress, handleMousePress);
+  event_handler.addEventListener(MouseRelease, handleMouseRelease);
+  event_handler.addEventListener(Resize, handleResize);
+  event_handler.addEventListener(MouseScroll, handleScroll);
 
   // Loading font for text
   sf::Font font;
   if (!font.loadFromFile("./resources/SF-Pro-Text-Regular.otf")) {
-    std::cout << "Font could not be loaded!" << endl;
+    std::cout << "Font could not be loaded!" << std::endl;
   }
 
   
 
   while(window.isOpen()) {
-    Event event;
+    // Clear the screen
     window.clear(sf::Color::Black);
-    event_handler.update();
+    // Update the event handler
+    event_handler.update(); 
+    // Set the view
+    window.setView(view);
 
     // Drawing some things :)
 

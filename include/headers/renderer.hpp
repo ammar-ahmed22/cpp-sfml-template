@@ -2,26 +2,19 @@
 #define RENDERER_H
 #include <SFML/Graphics.hpp>
 #include <string>
+#include "debug.hpp"
 
-using sf::RenderWindow;
-using sf::Vector2f;
-using sf::Vector2i;
-using sf::Color;
-using sf::Font;
-using sf::Vertex;
-using sf::Lines;
 
-using std::string;
 
 class Renderer{
   private:
-    RenderWindow *window;
+    sf::RenderWindow *window;
   
   public:
-    Renderer(RenderWindow *_window);
+    Renderer(sf::RenderWindow *_window);
     
-    void line(const Vector2f &from, const Vector2f &to, const Color &color = Color::White);
-    void text(const Font &font, const string &str, const Vector2f &pos = {0.f, 0.f}, const int &size = 10, const Color &color = Color::White);
+    void line(const sf::Vector2f &from, const sf::Vector2f &to, const sf::Color &color = sf::Color::White);
+    void text(const sf::Font &font, const std::string &str, const sf::Vector2f &pos = {0.f, 0.f}, const int &size = 10, const sf::Color &color = sf::Color::White);
 
 };
 

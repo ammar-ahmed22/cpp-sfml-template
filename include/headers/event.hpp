@@ -4,37 +4,45 @@
 #include <map>
 #include <functional>
 #include <iostream>
+#include "debug.hpp"
 
-using sf::Event;
-using sf::RenderWindow;
-using std::map;
-using std::cout;
-using std::endl;
-
-using EventListener = std::function<void(Event, RenderWindow*)>;
 
 enum EventType {
   MousePress,
   MouseRelease,
-  Close
+  Close,
+  Resize,
+  MouseScroll
 };
+
+class EventContext {
+  public:
+    sf::RenderWindow *window;
+    sf::Event event;
+    sf::View &view;
+
+    EventContext(sf::RenderWindow *p_window, sf::View &p_view);
+};
+
+using EventListener = std::function<void(EventContext &)>;
 
 class EventHandler{
   public:
-    EventHandler(RenderWindow* _window);
+    EventHandler(sf::RenderWindow* _window, sf::View &view);
 
-    void add_event_listener(EventType event_type, EventListener listener);
+    void addEventListener(EventType event_type, EventListener listener);
     void update();
 
   private:
-    RenderWindow *window;
-    Event event;
-    map<EventType, EventListener> listeners;
-    void handle_event(EventType event_type, Event event, RenderWindow *window);
+    EventContext m_event_ctx;
+    std::map<EventType, EventListener> listeners;
+    void handleEvent(EventType event_type);
 };
 
-void handle_close(Event event, RenderWindow *window);
-void handle_mouse_press(Event event, RenderWindow *window);
-void handle_mouse_release(Event event, RenderWindow *window);
+void handleClose(EventContext &event_ctx);
+void handleMousePress(EventContext &event_ctx);
+void handleMouseRelease(EventContext &event_ctx);
+void handleResize(EventContext &event_ctx);
+void handleScroll(EventContext &event_ctx);
 
 #endif
